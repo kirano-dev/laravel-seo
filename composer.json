@@ -1,0 +1,29 @@
+{
+    "name": "kirano-dev/laravel-seo",
+    "description": "Simply add SEO to your project (works with/for Filament, Blade, Api)",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "KiranoDev\\LaravelSeo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kirano-dev",
+            "email": "developer@kirano.uz"
+        }
+    ],
+    "require-dev": {
+        "laravel/framework": "^11.30"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KiranoDev\\LaravelSeo\\Providers\\LaravelSeoServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "filament/filament": "^3.2"
+    }
+}
