@@ -22,8 +22,5 @@
                 "KiranoDev\\LaravelSeo\\Providers\\LaravelSeoServiceProvider"
             ]
         }
-    },
-    "require": {
-        "filament/filament": "^3.2"
     }
 }
