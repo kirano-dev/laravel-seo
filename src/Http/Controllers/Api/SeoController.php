@@ -3,27 +3,17 @@
 namespace KiranoDev\LaravelSeo\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use KiranoDev\LaravelSeo\Http\Requests\StoreSeoRequest;
 use KiranoDev\LaravelSeo\Http\Requests\UpdateSeoRequest;
 use KiranoDev\LaravelSeo\Http\Resources\SeoResource;
 use KiranoDev\LaravelSeo\Models\Seo;
-use KiranoDev\LaravelSeo\Models\Seo as SeoModel;
 
 class SeoController extends Controller
 {
-    public function index(Request $request): JsonResponse|SeoResource
+    public function index()
     {
-        $seo = Seo::findByUrl($request->get('url'));
-
-        if (!$seo) return response()->json([
-            'data' => SeoModel::getDefault()
-        ]);
-
-        return new SeoResource(
-            cache()->rememberForever($seo->getCacheKey(), fn() => $seo)
-        );
+        return SeoResource::collection(Seo::all());
     }
 
     public function store(StoreSeoRequest $request): SeoResource {
@@ -34,5 +24,17 @@ class SeoController extends Controller
         $seo->update($request->validated());
 
         return new SeoResource($seo);
+    }
+
+    public function show(string $url): JsonResponse|SeoResource {
+        $seo = Seo::findByUrl($url);
+
+        if (!$seo) return response()->json([
+            'data' => Seo::getDefault()
+        ]);
+
+        return new SeoResource(
+            cache()->rememberForever($seo->getCacheKey(), fn() => $seo)
+        );
     }
 }
