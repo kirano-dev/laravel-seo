@@ -13,7 +13,7 @@ use KiranoDev\LaravelSeo\Models\Seo as SeoModel;
 
 class SeoController extends Controller
 {
-    public function get(Request $request): JsonResponse|SeoResource
+    public function index(Request $request): JsonResponse|SeoResource
     {
         $seo = Seo::findByUrl($request->get('url'));
 
