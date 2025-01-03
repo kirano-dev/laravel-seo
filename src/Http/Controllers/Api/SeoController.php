@@ -42,6 +42,7 @@ class SeoController extends Controller
         ]);
 
         $seo->update($request->validated());
+        cache()->forget($seo->getCacheKey());
 
         return new SeoResource($seo);
     }
