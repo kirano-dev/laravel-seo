@@ -10,7 +10,7 @@ class UpdateSeoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'url' => ['sometimes', Rule::unique('seo')->ignore($this->route('seo'), 'url')],
+            'url' => ['required', Rule::unique('seo')->ignore($this->route('seo'), 'url')],
             'title' => ['sometimes'],
             'description' => ['sometimes'],
             'keywords' => ['sometimes'],
