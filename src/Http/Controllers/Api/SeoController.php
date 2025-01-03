@@ -46,4 +46,16 @@ class SeoController extends Controller
 
         return new SeoResource($seo);
     }
+
+    public function destroy(Request $request): JsonResponse
+    {
+        $seo = Seo::findByUrl($request->url);
+
+        if ($seo) {
+            cache()->forget($seo->getCacheKey());
+            $seo->delete();
+        }
+
+        return response()->json('ok', 204);
+    }
 }

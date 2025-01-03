@@ -9,4 +9,5 @@ Route::prefix(config('seo.api_prefix') . 'seo')
         Route::get('/', 'index');
         Route::post('/', 'store');
         Route::patch('/', 'update');
+        Route::delete('/', 'destroy');
 });
