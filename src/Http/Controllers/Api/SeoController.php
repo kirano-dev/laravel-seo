@@ -41,6 +41,8 @@ class SeoController extends Controller
             'data' => Seo::getDefault()
         ]);
 
+        $seo->update($request->validated());
+
         return new SeoResource($seo);
     }
 }
