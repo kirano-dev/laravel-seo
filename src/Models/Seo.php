@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seo extends Model
 {
+    const CACHE_KEY = 'seo';
+
     protected $table = 'seo';
 
     protected $fillable = [
