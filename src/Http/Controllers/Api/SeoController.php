@@ -30,11 +30,13 @@ class SeoController extends Controller
             $eTag = md5(json_encode($data));
             $headers = [
                 'ETag' => $eTag,
-                'Cache-Control' => 'public, max-age=0',
+                'Cache-Control' => 'public, max-age=60',
             ];
 
             if (request()->header('If-None-Match') === $eTag) {
-                return response(status: 304);
+                return response(status: 304, headers: [
+                    'Cache-Control' => 'public, max-age=60',
+                ]);
             }
 
             return response()
