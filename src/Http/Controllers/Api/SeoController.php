@@ -24,7 +24,6 @@ class SeoController extends Controller
             ]);
 
             $data = new SeoResource(cache()
-                ->tags(Seo::CACHE_KEY)
                 ->rememberForever($seo->getCacheKey(), fn() => $seo));
 
             $eTag = md5(json_encode($data));
@@ -53,8 +52,7 @@ class SeoController extends Controller
     public function store(StoreSeoRequest $request): SeoResource {
         $seo = Seo::create($request->validated());
 
-        cache()->tags(Seo::CACHE_KEY)->flush();
-        cache()->tags(Seo::CACHE_KEY)->rememberForever($seo->getCacheKey(), fn() => $seo);
+        cache()->rememberForever($seo->getCacheKey(), fn() => $seo);
 
         return new SeoResource($seo);
     }
@@ -68,7 +66,6 @@ class SeoController extends Controller
 
         $seo->update($request->validated());
         cache()->forget($seo->getCacheKey());
-        cache()->tags(Seo::CACHE_KEY)->flush();
 
         return new SeoResource($seo);
     }
@@ -79,7 +76,6 @@ class SeoController extends Controller
 
         if ($seo) {
             cache()->forget($seo->getCacheKey());
-            cache()->tags(Seo::CACHE_KEY)->flush();
             $seo->delete();
         }
 
