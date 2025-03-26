@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('seo', function (Blueprint $table) {
             $table->id();
-            $table->text('url')->unique();
+            $table->text('url');
             $table->text('title')->nullable();
             $table->text('keywords')->nullable();
             $table->text('description')->nullable();
