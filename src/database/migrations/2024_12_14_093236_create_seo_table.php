@@ -14,10 +14,10 @@ return new class extends Migration
     {
         Schema::create('seo', function (Blueprint $table) {
             $table->id();
-            $table->string('url')->unique();
-            $table->string('title')->nullable();
-            $table->string('keywords')->nullable();
-            $table->string('description')->nullable();
+            $table->text('url')->unique();
+            $table->text('title')->nullable();
+            $table->text('keywords')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
