@@ -24,6 +24,10 @@ class LaravelSeoPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
+        if ($this->canViewAnyCallback) {
+            SeoResource::overrideCanViewAnyUsing($this->canViewAnyCallback);
+        }
+        
         $panel
             ->resources([
                 SeoResource::class,
