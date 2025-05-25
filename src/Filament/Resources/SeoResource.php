@@ -2,6 +2,7 @@
 
 namespace KiranoDev\LaravelSeo\Filament\Resources;
 
+use Closure;
 use Filament\Forms\Components\Textarea;
 use KiranoDev\LaravelSeo\Filament\Resources\SeoResource\Pages;
 use Filament\Forms\Components\TextInput;
@@ -20,6 +21,20 @@ class SeoResource extends Resource
 
     protected static ?string $label = 'SEO';
     protected static ?string $pluralLabel = 'SEO';
+
+    protected static ?Closure $canViewAnyCallback = null;
+
+    public static function overrideCanViewAnyUsing(Closure $callback): void
+    {
+        static::$canViewAnyCallback = $callback;
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::$canViewAnyCallback
+            ? call_user_func(static::$canViewAnyCallback)
+            : true;
+    }
 
     public static function form(Form $form): Form
     {
